@@ -26,7 +26,7 @@ var longitude;
 //display that data in the main content box
 
 function displayCurrentWeather() {
-    
+    //reset API call variables
 }
 
 //concat url for the futureWeatherAPI
@@ -43,6 +43,8 @@ function displayFutureWeather() {
         //check the data that is being pulled
         console.log(data)
         
+        //need a conditional statement that checks the status of the api call. if 200 then continue with data processing. If 404, display that the city is not available
+        
         //set lat and lon for the parameters of the currentWeatherAPI
         latitude = "&lat=" + data.city.coord.lat;
         longitude = "&lon=" + data.city.coord.lon;
@@ -52,8 +54,27 @@ function displayFutureWeather() {
         cardListEl = document.createElement('ul');
         cardListEl.setAttribute('id', 'card-list');
 
-        //need to compare array to the next day (incrementing) and time set for 1200
-        //call the current day weather function
+        //create a button that will generate if we don't return an error
+        
+        //need to compare array to the next day (incrementing)
+        var dayIndex = data.list[0].dt_txt.split(' ');
+        dayIndex = dayIndex[0].split('-');
+        dayIndex = dayIndex[2] - 1;
+
+        for (var i = 0; i < data.list.length; i++) {
+            dayCompare = data.list[i].dt_txt.split(' ');
+            dayCompare = dayCompare[0].split('-');
+            dayCompare = dayCompare[2];
+            
+            if (dayIndex != dayCompare) {
+                //now display the data
+                dayIndex = dayCompare;
+            }
+        }
+        
+
+        //call displayCurrentWeather()
+        
     })
 }
 

@@ -28,7 +28,15 @@ function setup() {
         // console.log(data)  
 
         //need a conditional statement that checks the status of the api call. if 200 then continue with data processing. If 404, display that the city is not available
-        if (data.status != 200) {
+        if (data.cod != 200) {
+            if (document.getElementById('error-text') !== null){
+                document.getElementById('error-text').remove();
+            }
+            console.log(document.getElementById('error-text') === null)
+            let errorText = document.createElement('h1');
+            errorText.textContent = 'That is not a valid City. Please try again'
+            errorText.setAttribute('id', 'error-text');
+            subContent.append(errorText);
             resetVariables()
         }
 
@@ -82,7 +90,7 @@ function displayWeather(city) {
         return response.json();
     })
     .then(function (data){
-        console.log(data);
+        // console.log(data);
         mainContent.remove();
         mainContent = document.createElement('div');
         mainContent.classList.add('mx-4', 'mb-3', 'border', 'border-secondary', 'p-3');
@@ -97,8 +105,13 @@ function displayWeather(city) {
         //display city name & date
         let CurrentDate = new Date(data.daily[0].dt*1000);
         let mainHeader = document.createElement('h1');
+        let mainWeatherIcon = document.createElement('img');
+        let mainIconURL = 'http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '@2x.png';
+        mainWeatherIcon.setAttribute('href', data.current.weather[0].main);
+        mainWeatherIcon.setAttribute('src', mainIconURL);
         mainHeader.classList.add('display-4');
-        mainHeader.textContent = city + " " + ((CurrentDate.getMonth() + 1) + "/" + CurrentDate.getDate() + "/" + CurrentDate.getFullYear())
+        mainHeader.textContent = city + " " + ((CurrentDate.getMonth() + 1) + "/" + CurrentDate.getDate() + "/" + CurrentDate.getFullYear());
+        mainHeader.append(mainWeatherIcon);
         mainContent.append(mainHeader);
 
         let mainTemp = document.createElement('h5');
@@ -125,10 +138,10 @@ function displayWeather(city) {
         cardListEl.classList.add('list-group-horizontal-lg', 'list-group', 'justify-content-between');
         
         let forcastText = document.createElement('h2');
-        
+
         for (var i = 1; i <= 5; i++){
             let cardEl = document.createElement('li');
-            cardEl.classList.add('card','list-group-item', 'col-sm-12', 'col-lg-2', 'mx-2', 'mb-3', 'border', 'rounded-3', 'border-info', 'bg-info');
+            cardEl.classList.add('card','list-group-item', 'col-sm-12', 'col-lg-2', 'mx-2', 'mb-3', 'border', 'rounded-3', 'border-info', 'bg-info', 'bg-gradient');
             
             let cardBody = document.createElement('div');
             cardBody.classList.add('card-body');
@@ -142,7 +155,6 @@ function displayWeather(city) {
             //add icon
             let weatherState = document.createElement('img');
             let iconURL = 'http://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon + '@2x.png';
-            weatherState.classList.add('justify-content-center', 'd-flex')
             weatherState.setAttribute('href', data.daily[i].weather[0].main);
             weatherState.setAttribute('src', iconURL);
 

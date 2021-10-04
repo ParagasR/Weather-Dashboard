@@ -123,14 +123,29 @@ function displayWeather(city) {
         let mainHumidity = document.createElement('h5');
         mainHumidity.textContent = "Humidity: " + data.daily[0].humidity + "%";
 
-        let UVindex = document.createElement('h5');
-        UVindex.textContent = "UVI: " + data.daily[0].uvi;
+        let UVIndex = document.createElement('span');
+        let UVText = document.createElement('h5');
+        UVText.textContent = "UVI: ";
+        let UVContent = document.createElement('h5');
+        let uv = data.daily[0].uvi;
+        UVContent.textContent = uv;
+        UVContent.classList.add('border', 'rounded-pill', 'px-3', 'ms-3', 'custom-width');
+        if (uv < 3) {
+            UVContent.classList.add('bg-success');
+        } else if (uv < 8) {
+            UVContent.classList.add('bg-warning');
+        } else {
+            UVContent.classList.add('bg-danger');
+        }
+
+        UVIndex.appendChild(UVText);
+        UVIndex.appendChild(UVContent);
 
         //display temp wind humidity & UVi
         mainContent.append(mainTemp);
         mainContent.append(mainWind);
         mainContent.append(mainHumidity);
-        mainContent.append(UVindex);
+        mainContent.append(UVIndex);
         //create cards that will be shown for the next 5 days
         cardListEl.remove();
         cardListEl = document.createElement('ul');

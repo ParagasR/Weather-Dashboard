@@ -11,3 +11,11 @@
 .btn {
   width: 100%;
 }
+
+.custom-width {
+  width: fit-content;
+}
+
+span h5 {
+  display: inline;
+}

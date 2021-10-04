@@ -4,6 +4,10 @@
     outline: solid #f00 1px !important;
   } */
 
-.card {
-  width: 14rem;
+#button-list {
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
 }

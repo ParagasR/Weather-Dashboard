@@ -4,7 +4,7 @@
   <head>
     <title></title>
     <meta charset="UTF-8" />
-    <!-- <link rel="stylesheet" href="./assets/css/reset.css"/> -->
+    <link rel="stylesheet" href="./assets/css/reset.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <script
@@ -14,27 +14,29 @@
   </head>
 
   <body>
-    <header>
-      <div class='container mb-5 justify-content-center'>
-        <h1>Weather Forecast</h1>
+    <header class='bg-primary bg-gradient'>
+      <div class='container mb-5 p-4'>
+        <h1 class='d-flex justify-content-center'>Weather Forecast</h1>
       </div>
     </header>
 
     <main>
-      <div class="container">
+      <div class="">
         <div class="row">
-          <div class="col-sm-12 col-lg-3 border-end pe-3">
+          <div class="col-sm-12 col-lg-3 pe-3 ms-3">
+            <h3 class='mb-3'>Enter in a city:</h3>
             <form>
               <div class='mb-3'>
                 <input type='text' placeholder="City Name" class='form-control' id='form'>
               </div>
               <div class='mb-3'>
-                <button type="submit" class="btn btn-primary" id='btn'>Submit</button>
+                <button type="submit" class="btn btn-primary mt-2" id='btn'>Submit</button>
               </div>
             </form>
-            <ul id='button-list'></ul>
+            <h3 class=" border-top border-secondary mt-5">Search History</h3>
+            <ul class='list-group' id='button-list'></ul>
           </div>
-          <div class="col-sm-12 col-lg-9" id="content">
+          <div class="col-sm-12 col-lg-8" id="content">
             <div id='main-content'></div>
             <div id='sub-content'>
               <ul id="card-list"></ul>
